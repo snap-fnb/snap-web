@@ -1,0 +1,24 @@
+This is a starting list...
+
+Can I:
+  - Schedule an appointment with the banker
+  - Spend $100 dollars
+  - Spend $100 on gifts
+  - Go on vacation in December
+  - Buy a present for my partner
+  - Buy a house (think mortgage, rent)
+  - Live in Denver (think college student)
+  - Send money to Tim
+- Show Me:
+  - Recent transactions
+  - Upcoming bills
+  - Current balances
+  - Newsfeed (of spending habits, did I spend too much this week?)
+  - How I'm doing (day, month, year-to-date)
+  - When stuff will be paid off
+  - Our/my transactions
+  - How I can make more money (transfer to savings implicitly and show how much could be made.  Note, most rich people get rich incrementally)
+  - Bills to pay
+  - My transactions, joint transactions, spouses transactions
+- Help
+  - Persistent chat bot at right bottom
