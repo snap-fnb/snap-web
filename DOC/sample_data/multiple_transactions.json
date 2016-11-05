@@ -1,5 +1,6 @@
 [
   {
+  "kind": "transaction",
   "amount": 1234.56,
   "flow": "in",
   "payee": "State of Nebraska",
@@ -12,6 +13,7 @@
   ]
 },
 {
+  "kind": "transaction",
   "amount": 142.86,
   "flow": "out",
   "payee": "Wooly Canada",
@@ -26,6 +28,7 @@
   ]
 },
 {
+  "kind": "transaction",
   "amount": 72.11,
   "flow": "out",
   "payee": "Delicious Canada",
