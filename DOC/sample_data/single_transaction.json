@@ -1,0 +1,14 @@
+{
+  "amount": 142.86,
+  "flow": "out",
+  "payee": "Wooly Canada",
+  "account": "joint checking",
+  "category":  "travel",
+  "memo": "Amazing wool sweater",
+  "timeStamp": "2016-10-22T18:25:43.511Z",
+  "tags": [
+    "trip",
+    "canada",
+    "clothes"
+  ]
+}
