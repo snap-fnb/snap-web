@@ -23,4 +23,19 @@ export default function() {
 
     http://www.ember-cli-mirage.com/docs/v0.2.x/shorthands/
   */
+
+  this.get('/search', ({ suggestions }, request) => {
+    let id = request.params.id;
+
+    return {
+      canI: [{
+        desc: 'Go to eat at Block 16',
+      }],
+      showMe: [{
+        desc: 'How much I spent at Block 16 this week'
+      }, {
+        desc: 'How often go to Block 16'
+      }]
+    };
+  });
 }

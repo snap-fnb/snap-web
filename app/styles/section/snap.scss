@@ -1,0 +1,50 @@
+.aor {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.aor .form-control {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.fm {
+  color: #1ca8dd;
+  font-weight: normal;
+  border-radius: 0;
+}
+
+.fm, .fm:active, .fm.active, .fm[disabled], fieldset[disabled] .fm {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.aor .fm {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  padding: 9px 10px;
+  color: #b7bcc8;
+  border: 0;
+  line-height: 0;
+}
+
+.bv:before {
+  position: relative;
+  top: 2px;
+  display: inline-block;
+  font-family: "toolkit-entypo";
+  speak: none;
+  font-size: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.adn:before {
+  content: "\EAEF";
+}
