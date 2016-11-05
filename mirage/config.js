@@ -83,4 +83,6 @@ export default function() {
       showMe: showMeResults
     };
   });
+  // passthrough to the node server that is middleware to slack.
+  this.passthrough('http://localhost:1337/**');
 }

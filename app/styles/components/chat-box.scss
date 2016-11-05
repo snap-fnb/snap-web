@@ -1,0 +1,16 @@
+
+.slack-chat-widget .sc-header {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5em 1em;
+  line-height: 1.5em;
+  background-color: #006633;
+  }
+
+  .slack-chat-widget .sc-header .sc-profile {
+    position: absolute;
+    display: block;
+    border: 0px solid #261732;
+  }
