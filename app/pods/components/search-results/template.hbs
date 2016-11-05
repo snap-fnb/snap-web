@@ -7,7 +7,13 @@
   {{#each-in results as |key value|}}
     {{#if value.length}}
       <div class="result-group">
-        <span class="result-group-heading tag tag-default">{{key}}</span>
+        <span class="result-group-heading tag tag-default">
+          {{#if (eq key 'canI')}}
+            Can I...
+          {{else}}
+            Show me...
+          {{/if}}
+        </span>
         <ul class="list-unstyled">
           {{#each value as |resultItem|}}
             <li {{action 'chooseItem' resultItem}}>
