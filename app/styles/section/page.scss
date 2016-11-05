@@ -1,0 +1,53 @@
+.featurette-divider {
+  margin: 5rem 0;
+}
+
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05rem;
+}
+
+.footer {
+  color: #777;
+}
+
+.header {
+  padding-bottom: 1rem;
+  border-bottom: 5px solid #4aaa42;
+}
+
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 3rem;
+}
+
+.header, .marketing, .footer {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.marketing {
+  margin: 3rem 0;
+}
+
+.marketing h2 {
+  font-weight: normal;
+}
+
+@media (min-width: 768px) {
+  .featurette-heading {
+    font-size: 50px;
+    margin-top: 7rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header, .marketing, .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

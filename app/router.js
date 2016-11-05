@@ -7,7 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('snap', {path: '/'});
+  this.route('snap');
 });
 
 export default Router;
