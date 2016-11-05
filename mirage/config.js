@@ -1,5 +1,11 @@
 import NLP from 'npm:nlp_compromise';
 
+const house = ['house', 'mortgage', 'loan', 'refinance', '2nd', 'second'];
+const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow'];
+const transactions = ['deposit', 'transfer', 'transaction', 'withdraw'];
+// const places = ['Block 16', 'Flat Iron Cafe'];
+const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'vacation'];
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -27,57 +33,111 @@ export default function() {
   */
 
   this.get('/search', ({ suggestions }, request) => {
+    // Get the search term.
     let search = request.queryParams.query;
+
+    // Parse the search term as a sentance.
     let parsedQuestion = NLP.sentence(decodeURIComponent(search));
 
-    // Filter out nouns
+    // Filter out nouns, verbs, adjectives.  We don't really care about the
+    // rest for now.
     let searchTerms = parsedQuestion.terms.filter(term => {
-      return ['Noun', 'Verb'].includes(term.tag);
+      return ['Noun', 'Verb', 'Adjective'].includes(term.tag);
     });
 
-    console.log(searchTerms, parsedQuestion);
+    console.log('Search terms: ', searchTerms, ' Parsed Question: ', parsedQuestion);
 
     let canIResults = [];
     let showMeResults = [];
 
-    searchTerms.forEach(term => {
-      switch (term.singularize()) {
-        case 'transaction':
-          if (parsedQuestion.adjectives().filter(a => a.normal === 'all').length) {
-            showMeResults = showMeResults.concat([{
-              desc: 'All future transactions',
-              codeName: 'transaction_list_all_future'
-            }, {
-              desc: 'All past transactions this year',
-              codeName: 'transaction_list_all_past_year'
-            }]);
-          } else {
-            showMeResults = showMeResults.concat([{
-              desc: 'Last 5 days',
-              codeName: 'transaction_list_last_5'
-            }, {
-              desc: `This month's`,
-              codeName: 'transaction_list_this_month'
-            }, {
-              desc: `Future`,
-              codeName: 'transaction_list_this_year'
-            }]);
-          }
-          break;
-        case 'repair':
-          canIResults = canIResults.concat([{
-            desc: 'Safe to spend',
-            codeName: 'safe_to_spend'
-          }, {
-            desc: 'Other sources',
-            codeName: 'safe_to_spend_other'
-          }]);
-          break;
-        default:
-          break;
+    // TODO: check account to determine if they have a mortgage
+    let houseTerms = searchTerms.filter(term => house.includes(term.normal));
+    if (houseTerms.length) {
+      canIResults = canIResults.concat([{
+        desc: 'Buy a house soon',
+        codeName: 'future_transaction_mortgage_app'
+      }]);
+
+      showMeResults = showMeResults.concat([{
+        desc: 'Start a mortage application',
+        codeName: 'future_transaction_mortgage_app'
+      }]);
+    }
+
+    // Match appointments
+    let appointmentTerms = searchTerms.filter(term => appointment.includes(term.normal));
+    if (appointmentTerms.length) {
+      canIResults = canIResults.concat([{
+        desc: 'Set up an appointment with a personal banker',
+        codeName: 'appointment_setup_personal'
+      }]);
+
+      showMeResults = showMeResults.concat([{
+        desc: 'See closest branches',
+        codeName: 'appointment_show_branches'
+      }]);
+    }
+
+    // Match transactions
+    let transactionTerms = searchTerms.filter(term => transactions.includes(term.normal));
+    if (transactionTerms.length) {
+      canIResults = canIResults.concat([{
+        desc: 'Transfer money',
+        codeName: 'transaction_money_transfer'
+      }]);
+
+      if (parsedQuestion.adjectives().filter(a => a.normal === 'all').length) {
+        showMeResults = showMeResults.concat([{
+          desc: 'Recent deposits',
+          codeName: 'transaction_list_recent_deposits'
+        }, {
+          desc: 'Recent transfers',
+          codeName: 'transaction_list_recent_tranfers'
+        }, {
+          desc: 'All future transactions',
+          codeName: 'transaction_list_all_future'
+        }, {
+          desc: 'All past transactions this year',
+          codeName: 'transaction_list_all_past_year'
+        }]);
+      } else {
+        showMeResults = showMeResults.concat([{
+          desc: 'Last 5 days',
+          codeName: 'transaction_list_last_5'
+        }, {
+          desc: `This month's`,
+          codeName: 'transaction_list_this_month'
+        }, {
+          desc: `Future`,
+          codeName: 'transaction_list_this_year'
+        }]);
       }
-    });
-    
+    }
+
+    // Match spend events
+    let spendEventTerms = searchTerms.filter(term => spendEvents.includes(term.normal));
+    if (spendEventTerms.length) {
+      let value = '';
+      let desc = '';
+
+      if (parsedQuestion.values()[0]) {
+        value = parsedQuestion.values()[0].text;
+      }
+
+      if (value) {
+        desc = `Spend ${value} for ${spendEventTerms[0].normal}`;
+      } else {
+        desc = `Spend money on ${spendEventTerms[0].normal}`;
+      }
+
+      canIResults = canIResults.concat([{
+        desc,
+        codeName: 'safe_to_spend'
+      }]);
+
+      showMeResults = showMeResults.concat([]);
+    }
+
     return {
       canI: canIResults,
       showMe: showMeResults
