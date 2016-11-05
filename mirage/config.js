@@ -1,10 +1,15 @@
+import Ember from 'ember';
 import NLP from 'npm:nlp_compromise';
 
+const { Logger: { info }} = Ember;
+
 const house = ['house', 'mortgage', 'loan', 'refinance', '2nd', 'second'];
-const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow'];
-const transactions = ['deposit', 'transfer', 'transaction', 'withdraw'];
+const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow', 'appointment', 'lender'];
+const transactions = ['deposit', 'transfer', 'transaction', 'withdraw', 'escrow', 'payment'];
 // const places = ['Block 16', 'Flat Iron Cafe'];
 const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'vacation'];
+const accounts = ['college', 'funds', 'mine', 'partner'];
+const location = ['branch'];
 
 export default function() {
 
@@ -42,10 +47,10 @@ export default function() {
     // Filter out nouns, verbs, adjectives.  We don't really care about the
     // rest for now.
     let searchTerms = parsedQuestion.terms.filter(term => {
-      return ['Noun', 'Verb', 'Adjective'].includes(term.tag);
+      return ['Noun', 'Verb', 'Adjective', 'Infinitive'].includes(term.tag);
     });
 
-    console.log('Search terms: ', searchTerms, ' Parsed Question: ', parsedQuestion);
+    info('Search terms: ', searchTerms, ' Parsed Question: ', parsedQuestion);
 
     let canIResults = [];
     let showMeResults = [];
@@ -67,14 +72,15 @@ export default function() {
     // Match appointments
     let appointmentTerms = searchTerms.filter(term => appointment.includes(term.normal));
     if (appointmentTerms.length) {
-      canIResults = canIResults.concat([{
-        desc: 'Set up an appointment with a personal banker',
-        codeName: 'appointment_setup_personal'
-      }]);
-
       showMeResults = showMeResults.concat([{
-        desc: 'See closest branches',
-        codeName: 'appointment_show_branches'
+        desc: 'Schedule an appointment with a banker',
+        codeName: 'appointment_setup_banker'
+      }, {
+        desc: 'Schedule an appointment with a lender',
+        codeName: 'appointment_setup_lender'
+      }, {
+        desc: 'See all branches with lenders and bankers',
+        codeName: 'location_with_bankers_lenders'
       }]);
     }
 
@@ -135,7 +141,46 @@ export default function() {
         codeName: 'safe_to_spend'
       }]);
 
-      showMeResults = showMeResults.concat([]);
+      showMeResults = showMeResults.concat([{
+        desc: `See all ${spendEventTerms[0].normal} transactions`,
+        codeName: 'transaction_filter_by_place'
+      }, {
+        desc: 'See all restaurant transactions',
+        codeName: 'transaction_filter_by_category'
+      }]);
+    }
+
+    // Match on accounts
+    let accountTerms = searchTerms.filter(term => accounts.includes(term.normal));
+    if (accountTerms.length) {
+      showMeResults = showMeResults.concat([{
+        desc: 'See all college funds',
+        codeName: 'account_filter_by_college'
+      }, {
+        desc: 'See all accounts',
+        codeName: 'account_all'
+      }, {
+        desc: 'See investment accounts',
+        codeName: 'account_investment'
+      }]);
+    }
+
+    // Match on accounts
+    let locationTerms = searchTerms.filter(term => location.includes(term.normal));
+    if (locationTerms.length) {
+      showMeResults = showMeResults.concat([{
+        desc: 'Branch locations',
+        codeName: 'location_branch_all'
+      }, {
+        desc: 'All ATMs',
+        codeName: 'location_atm_all'
+      }, {
+        desc: 'All ATMs with deposit',
+        codeName: 'location_atm_filter_deposit'
+      }, {
+        desc: 'All drive-thrus',
+        codeName: 'location_atm_filter_drive_thru'
+      }]);
     }
 
     return {
