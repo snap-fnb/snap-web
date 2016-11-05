@@ -43,16 +43,26 @@ export default function() {
     searchTerms.forEach(term => {
       switch (term.singularize()) {
         case 'transaction':
-          showMeResults = showMeResults.concat([{
-            desc: 'Last 5 transactions',
-            codeName: 'transaction_list_last_5'
-          }, {
-            desc: `This month's transactions`,
-            codeName: 'transaction_list_this_month'
-          }, {
-            desc: `Future transactions`,
-            codeName: 'transaction_list_this_year'
-          }]);
+          if (parsedQuestion.adjectives().filter(a => a.normal === 'all').length) {
+            showMeResults = showMeResults.concat([{
+              desc: 'All future transactions',
+              codeName: 'transaction_list_all_future'
+            }, {
+              desc: 'All past transactions this year',
+              codeName: 'transaction_list_all_past_year'
+            }]);
+          } else {
+            showMeResults = showMeResults.concat([{
+              desc: 'Last 5 days',
+              codeName: 'transaction_list_last_5'
+            }, {
+              desc: `This month's`,
+              codeName: 'transaction_list_this_month'
+            }, {
+              desc: `Future`,
+              codeName: 'transaction_list_this_year'
+            }]);
+          }
           break;
         case 'repair':
           canIResults = canIResults.concat([{

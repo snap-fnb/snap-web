@@ -18,6 +18,14 @@
     .action-items {
       a {
         margin-right: 2rem;
+
+        &:hover {
+          text-decoration: none;
+        }
+
+        .fa {
+          margin-right: 0.5rem;
+        }
       }
     }
 
