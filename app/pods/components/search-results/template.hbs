@@ -5,15 +5,17 @@
   </div>
 {{else}}
   {{#each-in results as |key value|}}
-    <div class="result-group">
-      <h3>{{key}}</h3>
-      <ul>
-        {{#each value as |resultItem|}}
-          <li {{action 'chooseItem' resultItem}}>
-            {{resultItem.desc}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+    {{#if value.length}}
+      <div class="result-group">
+        <span class="result-group-heading tag tag-default">{{key}}</span>
+        <ul class="list-unstyled">
+          {{#each value as |resultItem|}}
+            <li {{action 'chooseItem' resultItem}}>
+              {{resultItem.desc}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
   {{/each-in}}
 {{/if}}

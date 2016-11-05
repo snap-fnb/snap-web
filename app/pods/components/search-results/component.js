@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { computed, isEmpty, Logger: { info }} = Ember;
 
 export default Ember.Component.extend({
-  classNames: ['col-md-6', 'search-results'],
+  classNames: ['search-results'],
 
   classNameBindings: ['hasResults:show:hide'],
 
