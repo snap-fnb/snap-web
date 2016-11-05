@@ -1,22 +1,27 @@
 [
   {
-  "kind": "SearchResult",
-  "sub_type": "can",
-  "query": "Can I go to the Flatiron Cafe?",
-  "answer": "yes",
-  "options": {
-    "green": "yes, you have $252.12 left in dinning category",
-    "orange": "yes, but you are spending faster this month than last",
-    "red": "No, save money for your other goals"
-  },
-  "budget_category": "dining",
-  "estimated_amount": 121.00,
-  "average_of_previous_amounts": 112.76,
-  "median_of_pervious_amounts": 120.15,
-  "flow": "out",
-  "timeStamp": "2016-11-04T18:25:43.511Z",
-  "tags": [
-    "nlp","can"
-  ]
-}
+    "kind": "SearchResult",
+    "sub_type": "can",
+    "query": "Can I go to the Flatiron Cafe?",
+    "answer": "yes",
+    "options": {
+      "green": "yes, you have $252.12 left in dinning category",
+      "orange": "yes, but you are spending faster this month than last",
+      "red": "No, save money for your other goals"
+    },
+    "budget_category": "dining",
+    "payee": {
+      "name": "Flatiron Cafe",
+      "category": "dinning"
+    },
+    "estimated_amount": 121,
+    "average_of_previous_amounts": 112.76,
+    "median_of_pervious_amounts": 120.15,
+    "flow": "out",
+    "timeStamp": "2016-11-04T18:25:43.511Z",
+    "tags": [
+      "nlp",
+      "can"
+    ]
+  }
 ]
