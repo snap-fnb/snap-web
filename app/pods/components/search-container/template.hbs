@@ -1,6 +1,6 @@
-<div class="row main-search clearfix">
-  <form class="aor" {{action "noop" on="submit"}}>
-    <div class="form-group col-md-6 search-box">
+<div class="main-search">
+  <form class="aor search-box" {{action "noop" on="submit"}}>
+    <div class="form-group">
       <label class="form-control-label sr-only" for="snap-search-box">Search for anything related to transactions</label>
       {{input value=searchValue key-up=(action 'handleFilterEntry') class="form-control" placeholder="Can I... Show Me..."}}
       <button type="submit" class="fm">
@@ -8,6 +8,10 @@
       </button>
     </div>
   </form>
+  <div class="action-items {{if (or results isLoading) 'hide'}}">
+    <a href="#">Newsfeed <span class="tag tag-pill tag-primary">10</span></a>
+    <a href="#">Where you stand</a>
+  </div>
 </div>
 
-{{yield isLoading results (action 'selectResult')}}
+{{yield isSearchActive isLoading results (action 'selectResult')}}

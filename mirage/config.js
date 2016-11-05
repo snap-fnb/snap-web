@@ -1,3 +1,5 @@
+import NLP from 'npm:nlp_compromise';
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -25,17 +27,50 @@ export default function() {
   */
 
   this.get('/search', ({ suggestions }, request) => {
-    let id = request.params.id;
+    let search = request.queryParams.query;
+    let parsedQuestion = NLP.sentence(decodeURIComponent(search));
 
+    // Filter out nouns
+    let searchTerms = parsedQuestion.terms.filter(term => {
+      return ['Noun', 'Verb'].includes(term.tag);
+    });
+
+    console.log(searchTerms, parsedQuestion);
+
+    let canIResults = [];
+    let showMeResults = [];
+
+    searchTerms.forEach(term => {
+      switch (term.singularize()) {
+        case 'transaction':
+          showMeResults = showMeResults.concat([{
+            desc: 'Last 5 transactions',
+            codeName: 'transaction_list_last_5'
+          }, {
+            desc: `This month's transactions`,
+            codeName: 'transaction_list_this_month'
+          }, {
+            desc: `Future transactions`,
+            codeName: 'transaction_list_this_year'
+          }]);
+          break;
+        case 'repair':
+          canIResults = canIResults.concat([{
+            desc: 'Safe to spend',
+            codeName: 'safe_to_spend'
+          }, {
+            desc: 'Other sources',
+            codeName: 'safe_to_spend_other'
+          }]);
+          break;
+        default:
+          break;
+      }
+    });
+    
     return {
-      canI: [{
-        desc: 'Go to eat at Block 16',
-      }],
-      showMe: [{
-        desc: 'How much I spent at Block 16 this week'
-      }, {
-        desc: 'How often go to Block 16'
-      }]
+      canI: canIResults,
+      showMe: showMeResults
     };
   });
 }
