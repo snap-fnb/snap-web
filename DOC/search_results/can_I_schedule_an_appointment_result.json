@@ -1,0 +1,15 @@
+[
+  {
+    "kind": "SearchResult",
+    "sub_type": "can_schedule",
+    "query": "Schedule an appointment with the banker?",
+    "answer": "yes, launching scheduler.",
+    "timeStamp": "2016-11-04T18:25:43.511Z",
+    "tags": [
+      "nlp",
+      "can",
+      "schedule",
+      "banker"
+    ]
+  }
+]
