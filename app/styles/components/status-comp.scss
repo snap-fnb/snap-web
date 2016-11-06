@@ -1,4 +1,8 @@
 .my-snap {
+  .component-container-title {
+    flex-direction: row;
+  }
+
   .my-snap-status-bar {
     background: #f2f2f2;
     height: 70px;
@@ -33,6 +37,15 @@
   .card {
     padding: 0;
     margin: 1rem;
+
+    .card-header {
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .card-footer {
+      color: #fff;
+    }
 
     &.bill-pay {
       li {
