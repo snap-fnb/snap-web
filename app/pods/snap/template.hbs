@@ -1,11 +1,18 @@
 {{! Primary search. }}
 {{#search-container
   searchAction=(action 'globalSearch')
+  toggleNewsFeedAction=(action 'toggleNewsFeedAction')
   as |isSearchActive isLoading groupedResults selectResultAction|}}
   {{search-results 
     isLoading=isLoading
     isSearchActive=isSearchActive
     results=groupedResults 
+    helpAction=helpAction
     selectResultAction=selectResultAction
   }}
 {{/search-container}}
+
+{{! News Feed}}
+{{#liquid-if isNewsFeedVisible class="newsFeed"}}
+  {{news-feed model=newsFeedData}}
+{{/liquid-if}}

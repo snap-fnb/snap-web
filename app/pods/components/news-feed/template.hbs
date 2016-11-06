@@ -1,1 +1,30 @@
-{{yield}}
+<div class="news-feed-group">
+  <div class="news-feed-group-title">Today</div>
+  <ul class="list-unstyled news-feed-list">
+    {{#each-in model as |key value|}}
+      {{#each value as |feedItem|}}
+        <li>
+          <span class="icon">
+            {{#if (eq feedItem.newsFeedGroup 'Alert')}}
+              <i class="fa fa-exclamation" aria-hidden="true"></i>
+            {{else if (eq feedItem.newsFeedGroup 'Notification')}}
+              <i class="fa fa-flag-o" aria-hidden="true"></i>
+            {{else}}
+              <i class="fa fa-comment-o" aria-hidden="true"></i>
+            {{/if}}
+          </span>
+          <span class="category">{{feedItem.newsFeedGroup}}</span>
+          <span class="title">{{feedItem.title}}</span>
+          <span class="feed-item-actions">
+            <span>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </span>
+            <span>
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </span>
+          </span>
+        </li>
+      {{/each}}
+    {{/each-in}}
+  </ul>
+</div>
