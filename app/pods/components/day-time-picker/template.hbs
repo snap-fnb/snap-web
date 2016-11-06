@@ -1,1 +1,4 @@
-Day Time Picker
+{{#power-calendar selected=selected onSelect=(action (mut selected) value="moment") as |calendar|}}
+  {{calendar.nav}}
+  {{calendar.days}}
+{{/power-calendar}}

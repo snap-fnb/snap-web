@@ -25,7 +25,7 @@ export default Ember.Component.extend({
    * Defaults to person if not passed
    */
   filterType: LOCATION,
-  filterTypes: Ember.A([LOCATION, PERSON, DAY]),
+  filterTypes: Ember.A([LOCATION, DAY, PERSON]),
 
   /**
    * Simple booleans for display on filter types
