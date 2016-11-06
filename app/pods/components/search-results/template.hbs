@@ -4,24 +4,28 @@
     <span class="sr-only">Loading...</span>
   </div>
 {{else}}
-  {{#each-in results as |key value|}}
-    {{#if value.length}}
-      <div class="result-group">
-        <span class="result-group-heading tag tag-default">
-          {{#if (eq key 'canI')}}
-            Can I...
-          {{else}}
-            Show me...
-          {{/if}}
-        </span>
-        <ul class="list-unstyled">
+  {{#if hasResults}}
+    {{#each-in results as |key value|}}
+      {{#if value.length}}
+        <div class="result-group">
+          <h6 class="result-group-heading dropdown-header">
+            {{#if (eq key 'canI')}}
+              Can I...
+            {{else}}
+              Show me...
+            {{/if}}
+          </h6>
           {{#each value as |resultItem|}}
-            <li {{action 'chooseItem' resultItem}}>
+            <a class="dropdown-item" href="#"  {{action 'chooseItem' resultItem}}>
               {{resultItem.desc}}
-            </li>
+            </a>
           {{/each}}
-        </ul>
-      </div>
-    {{/if}}
-  {{/each-in}}
+        </div>
+      {{/if}}
+    {{/each-in}}
+  {{else}}
+    <a class="dropdown-item disabled" href="#">
+      Couldn't find that. Can try something different?
+    </a>
+  {{/if}}
 {{/if}}

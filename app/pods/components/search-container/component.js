@@ -1,12 +1,19 @@
 import Ember from 'ember';
 
-const { isEmpty, Logger: { info }} = Ember;
+const { computed, isEmpty, Logger: { info }} = Ember;
 
 export default Ember.Component.extend({
   classNames: ['search-container'],
 
   // Whether the async operations are happening
   isLoading: false,
+
+  // Whether actively searching
+  isSearching: computed('searchValue', {
+    get() {
+      return this.get('searchValue').length > 0;
+    }
+  }),
 
   // The value entered in the search component.
   searchValue: '',
@@ -59,6 +66,8 @@ export default Ember.Component.extend({
         results: null,
         searchValue: ''
       });
+
+      this.get('displaySectionAction')(result);
     }
   }
 });

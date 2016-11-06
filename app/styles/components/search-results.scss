@@ -1,20 +1,14 @@
 .search-results {
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 0.5rem 0.75rem;
-    margin-top: -1rem;
-    z-index: 10;
-    position: absolute;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0.75rem;
+  margin-top: -1rem;
+  z-index: 10;
+  position: absolute;
+
+  @media (min-width: 768px) {
     max-width: 40rem;
     min-width: 40rem;
     min-height: 2rem;
-
-  .result-group li {
-    padding: 0.25rem 0.75rem;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  } 
 }

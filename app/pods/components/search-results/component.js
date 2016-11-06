@@ -5,19 +5,20 @@ const { computed, isEmpty, Logger: { info }} = Ember;
 export default Ember.Component.extend({
   classNames: ['search-results'],
 
-  classNameBindings: ['hasResults:show:hide'],
+  classNameBindings: ['isSearching:show:hide'],
 
   // Whether the loading <datalist>
-  isLoading: false,
+  isLoading: true,
   
+  // Whether the search is active.
+  isSearching: false,
+
   // Whether to show the results container
   hasResults: computed('isLoading', 'results', {
     get() {
       const results = this.get('results');
-      const isLoading = this.get('isLoading');
 
-      if (!isEmpty(results) && Object.keys(results).length ||
-          isLoading) {
+      if (!isEmpty(results) && (!isEmpty(results.canI) || !isEmpty(results.showMe))) {
         return true;
       }
 
@@ -30,7 +31,6 @@ export default Ember.Component.extend({
 
   actions: {
     chooseItem(item) {
-      info('Choosing item...', item);
       this.get('selectResultAction')(item);
     }
   }

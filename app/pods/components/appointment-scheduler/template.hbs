@@ -1,3 +1,4 @@
+<div class="component-container-title">Appointment Scheduler</div>
 {{#if isFiltered}}
   {{appointment-confirmation selectedPerson=selectedPerson}}
 {{else}}
@@ -20,4 +21,3 @@
     {{person-list selectPersonAction=(action "selectPerson")}}
   {{/if}}
 {{/if}}
-
