@@ -8,17 +8,6 @@
       </button>
     </div>
   </form>
-  <div class="action-items {{if (or results isLoading) 'hide'}}">
-    <a href="#" {{action toggleNewsFeedAction}}>
-      <i class="fa fa-newspaper-o" aria-hidden="true"></i>News Brief <span class="tag tag-pill tag-primary">10</span>
-    </a>
-    <button class="btn btn-link">
-      <i class="fa fa-camera-retro" aria-hidden="true"></i> My Snap
-    </button>
-    <a href="#">
-      <i class="fa fa-weixin" aria-hidden="true"></i> Help
-    </a>
-  </div>
 </div>
 
 {{yield isSearchActive isLoading results (action 'selectResult')}}

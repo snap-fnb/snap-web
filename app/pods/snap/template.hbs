@@ -12,7 +12,24 @@
   }}
 {{/search-container}}
 
+{{! Action items.}}
+<div class="action-items {{unless isNewsFeedVisible 'hide'}}">
+  <a href="#" {{action 'toggleNewsFeedAction'}}>
+    <i class="fa fa-newspaper-o" aria-hidden="true"></i>News Brief 
+    <span class="tag tag-pill tag-primary">{{newsFeedData.length}}</span>
+  </a>
+  <button class="btn btn-link">
+    <i class="fa fa-camera-retro" aria-hidden="true"></i> My Snap
+  </button>
+  <a href="#">
+    <i class="fa fa-weixin" aria-hidden="true"></i> Help
+  </a>
+</div>
+
 {{! News Feed}}
 {{#liquid-if isNewsFeedVisible class="newsFeed"}}
-  {{news-feed model=newsFeedData}}
+  {{news-feed 
+    model=newsFeedData
+    removeNewsItemAction=(action 'removeNewsItem')
+  }}
 {{/liquid-if}}

@@ -48,3 +48,23 @@
 .adn:before {
   content: "\EAEF";
 }
+
+@media (min-width: 768px) {
+  .action-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a, button {
+      margin-right: 2rem;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      .fa {
+        margin-right: 0.5rem;
+      }
+    }
+  } 
+}
