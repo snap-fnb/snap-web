@@ -1,58 +1,56 @@
 import Ember from 'ember';
 
-const { Logger: { info }} = Ember;
-
 export default Ember.Controller.extend({
+  // Ember ajax service.
   ajax: Ember.inject.service(),
+  
+  // The currently displayed component.  This is the result of choosing a search
+  // suggestion or one of the action items.
+  activeSnapComponent: '',
 
-  // Whether the news feed is visible.
-  isNewsFeedVisible: false,
+  // The data to pass to the currently active snap component.
+  activeSnapComponentTransientData: null,
 
-  // The newsfeed data
-  newsFeedData: [{
-    id: 1,
-    category: 'payment_upcoming',
-    detail: 'You have an upcoming payment that you may not meet.',
-    groupName: 'Alert',
-    groupKey: 'alerts',
-    level: 1, // 1 red, 2, orange, 3 green
-    title: 'Potential insufficient funds'
-  }, {
-    id: 2,
-    category: 'message',
-    detail: 'The current Terms and Agreement have changed.  Read more details here.',
-    groupName: 'Message',
-    groupKey: 'messages',
-    title: 'Terms and Agreement changes'
-  }, {
-    id: 3,
-    category: 'deposit',
-    detail: 'Deposit added to your account',
-    groupName: 'Notification',
-    groupKey: 'notifications',
-    title: 'New income added'
-  }, {
-    id: 4,
-    category: 'payment_upcoming',
-    detail: 'Upcoming rent payment',
-    groupName: 'Notification',
-    groupKey: 'notifications',
-    title: 'Upcoming rent payment'
-  }, {
-    id: 5,
-    category: 'payment_past',
-    detail: 'A payment was made.',
-    groupName: 'Notification',
-    groupKey: 'notifications',
-    title: 'Bill paid, awesome!'
-  }],
+  // Newsfeed data
+  newsFeedData: null,
 
   actions: {
-    toggleNewsFeedAction() {
-      this.toggleProperty('isNewsFeedVisible');
+    // Chooses the component to display and sets its data.
+    displaySnapComponent(chosenItem) {
+      this.setProperties({
+        activeSnapComponentTransientData: chosenItem,
+        activeSnapComponent: chosenItem.componentName
+      });
     },
 
-    // The uber search bar
+    // Toggles the news feed component
+    toggleNewsFeed() {
+      if (this.get('activeSnapComponent') !== 'news-feed') {
+        this.set('activeSnapComponent', 'news-feed');
+      } else {
+        this.set('activeSnapComponent', '');
+      }
+    },
+
+    // Toggles the news feed component
+    toggleHelp() {
+      if (this.get('activeSnapComponent') !== 'news-feed') {
+        this.set('activeSnapComponent', 'news-feed');
+      } else {
+        this.set('activeSnapComponent', '');
+      }
+    },
+
+    // Toggles the my snap component
+    toggleMySnap() {
+      if (this.get('activeSnapComponent') !== 'status-comp') {
+        this.set('activeSnapComponent', 'status-comp');
+      } else {
+        this.set('activeSnapComponent', '');
+      }
+    },
+
+    // Search assistant bar
     globalSearch(searchParam) {
       const ajax = this.get('ajax');
 
@@ -66,20 +64,9 @@ export default Ember.Controller.extend({
       return request;
     },
 
-    // Remove item
+    // Remove news feed item
     removeNewsItem(feedItem) {
-      info('removing item: ', feedItem);
-      let newsFeedData = this.get('newsFeedData');
-      
-      newsFeedData = newsFeedData
-        .filter(feed => feed.id !== feedItem.id);
-      
-      if (!newsFeedData.length) {
-        this.set('isNewsFeedVisible', false);
-      }
-      
-      this.set('newsFeedData', newsFeedData);
-      this.notifyPropertyChange('newsFeedData');
+      this.set('newsFeedData', this.get('newsFeedData').filter(feed => feed.id !== feedItem.id));
     }
   }
 });

@@ -13,29 +13,11 @@ const location = ['branch'];
 
 export default function() {
 
-  // These comments are here to help you get started. Feel free to delete them.
+  this.get('/newsfeed', (schema) => {
+    return schema.db.newsfeeds;
+  });
 
-  /*
-    Config (with defaults).
-
-    Note: these only affect routes defined *after* them!
-  */
-
-  // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  // this.namespace = '';    // make this `api`, for example, if your API is namespaced
-  // this.timing = 400;      // delay for each request, automatically set to 0 during testing
-
-  /*
-    Shorthand cheatsheet:
-
-    this.get('/posts');
-    this.post('/posts');
-    this.get('/posts/:id');
-    this.put('/posts/:id'); // or this.patch
-    this.del('/posts/:id');
-
-    http://www.ember-cli-mirage.com/docs/v0.2.x/shorthands/
-  */
+  this.del('/newsfeed/:id');
 
   this.get('/search', ({ suggestions }, request) => {
     // Get the search term.
@@ -55,17 +37,35 @@ export default function() {
     let canIResults = [];
     let showMeResults = [];
 
+    // Check for a value only
+    if (parsedQuestion.terms.length === 1 &&
+        parsedQuestion.terms[0].tag === 'Value') {
+      canIResults = canIResults.concat([{
+        desc: `Spend $${parsedQuestion.terms[0].normal} today`,
+        codeName: 'safe_to_spend',
+        componentName: 'safe-to-spend'
+      }]);
+
+      showMeResults = showMeResults.concat([{
+        desc: `All transactions $${parsedQuestion.terms[0].normal} or less`,
+        codeName: 'transaction_filter_by_place',
+        componentName: 'transaction-list'
+      }]);
+    }
+    
     // TODO: check account to determine if they have a mortgage
     let houseTerms = searchTerms.filter(term => house.includes(term.normal));
     if (houseTerms.length) {
       canIResults = canIResults.concat([{
         desc: 'Buy a house soon',
-        codeName: 'future_transaction_mortgage_app'
+        codeName: 'future_transaction_mortgage_app',
+        componentName: 'appointment-scheduler'
       }]);
 
       showMeResults = showMeResults.concat([{
         desc: 'Start a mortage application',
-        codeName: 'future_transaction_mortgage_app'
+        codeName: 'future_transaction_mortgage_app',
+        componentName: 'appointment-scheduler'
       }]);
     }
 
@@ -74,13 +74,16 @@ export default function() {
     if (appointmentTerms.length) {
       showMeResults = showMeResults.concat([{
         desc: 'Schedule an appointment with a banker',
-        codeName: 'appointment_setup_banker'
+        codeName: 'appointment_setup_banker',
+        componentName: 'appointment-scheduler'
       }, {
         desc: 'Schedule an appointment with a lender',
-        codeName: 'appointment_setup_lender'
+        codeName: 'appointment_setup_lender',
+        componentName: 'appointment-scheduler'
       }, {
-        desc: 'See all branches with lenders and bankers',
-        codeName: 'location_with_bankers_lenders'
+        desc: 'All branches with lenders and bankers',
+        codeName: 'location_with_bankers_lenders',
+        componentName: 'appointment-scheduler'
       }]);
     }
 
@@ -89,33 +92,41 @@ export default function() {
     if (transactionTerms.length) {
       canIResults = canIResults.concat([{
         desc: 'Transfer money',
-        codeName: 'transaction_money_transfer'
+        codeName: 'transaction_money_transfer',
+        componentName: 'create-transfer'
       }]);
 
       if (parsedQuestion.adjectives().filter(a => a.normal === 'all').length) {
         showMeResults = showMeResults.concat([{
           desc: 'Recent deposits',
-          codeName: 'transaction_list_recent_deposits'
+          codeName: 'transaction_list_recent_deposits',
+          componentName: 'create-transfer'
         }, {
           desc: 'Recent transfers',
-          codeName: 'transaction_list_recent_tranfers'
+          codeName: 'transaction_list_recent_tranfers',
+          componentName: 'create-transfer'
         }, {
           desc: 'All future transactions',
-          codeName: 'transaction_list_all_future'
+          codeName: 'transaction_list_all_future',
+          componentName: 'transaction-list'
         }, {
           desc: 'All past transactions this year',
-          codeName: 'transaction_list_all_past_year'
+          codeName: 'transaction_list_all_past_year',
+          componentName: 'transaction-list'
         }]);
       } else {
         showMeResults = showMeResults.concat([{
-          desc: 'Last 5 days',
-          codeName: 'transaction_list_last_5'
+          desc: 'Transactions over the last 5 days',
+          codeName: 'transaction_list_last_5',
+          componentName: 'transaction-list'
         }, {
-          desc: `This month's`,
-          codeName: 'transaction_list_this_month'
+          desc: `This month's transactions`,
+          codeName: 'transaction_list_this_month',
+          componentName: 'transaction-list'
         }, {
-          desc: `Future`,
-          codeName: 'transaction_list_this_year'
+          desc: `Future transactions`,
+          codeName: 'transaction_list_this_year',
+          componentName: 'transaction-list'
         }]);
       }
     }
@@ -138,15 +149,18 @@ export default function() {
 
       canIResults = canIResults.concat([{
         desc,
-        codeName: 'safe_to_spend'
+        codeName: 'safe_to_spend',
+        componentName: 'safe-to-spend'
       }]);
 
       showMeResults = showMeResults.concat([{
-        desc: `See all ${spendEventTerms[0].normal} transactions`,
-        codeName: 'transaction_filter_by_place'
+        desc: `All ${spendEventTerms[0].normal} transactions`,
+        codeName: 'transaction_filter_by_place',
+        componentName: 'transaction-list'
       }, {
-        desc: 'See all restaurant transactions',
-        codeName: 'transaction_filter_by_category'
+        desc: 'All restaurant transactions',
+        codeName: 'transaction_filter_by_category',
+        componentName: 'transaction-list'
       }]);
     }
 
@@ -154,14 +168,17 @@ export default function() {
     let accountTerms = searchTerms.filter(term => accounts.includes(term.normal));
     if (accountTerms.length) {
       showMeResults = showMeResults.concat([{
-        desc: 'See all college funds',
-        codeName: 'account_filter_by_college'
+        desc: 'All college funds',
+        codeName: 'account_filter_by_college',
+        componentName: 'account-list'
       }, {
-        desc: 'See all accounts',
-        codeName: 'account_all'
+        desc: 'All accounts',
+        codeName: 'account_all',
+        componentName: 'account-list'
       }, {
         desc: 'See investment accounts',
-        codeName: 'account_investment'
+        codeName: 'account_investment',
+        componentName: 'account-list'
       }]);
     }
 
@@ -170,16 +187,20 @@ export default function() {
     if (locationTerms.length) {
       showMeResults = showMeResults.concat([{
         desc: 'Branch locations',
-        codeName: 'location_branch_all'
+        codeName: 'location_branch_all',
+        componentName: 'locations-map'
       }, {
         desc: 'All ATMs',
-        codeName: 'location_atm_all'
+        codeName: 'location_atm_all',
+        componentName: 'locations-map'
       }, {
         desc: 'All ATMs with deposit',
-        codeName: 'location_atm_filter_deposit'
+        codeName: 'location_atm_filter_deposit',
+        componentName: 'locations-map'
       }, {
         desc: 'All drive-thrus',
-        codeName: 'location_atm_filter_drive_thru'
+        codeName: 'location_atm_filter_drive_thru',
+        componentName: 'locations-map'
       }]);
     }
 

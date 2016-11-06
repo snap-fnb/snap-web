@@ -1,11 +1,12 @@
 {{! Primary search. }}
 {{#search-container
+  displaySectionAction=(action 'displaySnapComponent')
   searchAction=(action 'globalSearch')
-  toggleNewsFeedAction=(action 'toggleNewsFeedAction')
-  as |isSearchActive isLoading groupedResults selectResultAction|}}
+  toggleNewsFeedAction=(action 'toggleNewsFeed')
+  as |isSearching isLoading groupedResults selectResultAction|}}
   {{search-results 
     isLoading=isLoading
-    isSearchActive=isSearchActive
+    isSearching=isSearching
     results=groupedResults 
     helpAction=helpAction
     selectResultAction=selectResultAction
@@ -14,22 +15,65 @@
 
 {{! Action items.}}
 <div class="action-items {{unless isNewsFeedVisible 'hide'}}">
-  <a href="#" {{action 'toggleNewsFeedAction'}}>
+  <a href="#" {{action 'toggleNewsFeed'}}>
     <i class="fa fa-newspaper-o" aria-hidden="true"></i>News Brief 
     <span class="tag tag-pill tag-primary">{{newsFeedData.length}}</span>
   </a>
-  <button class="btn btn-link">
+  <a href="#" {{action 'toggleMySnap'}}>
     <i class="fa fa-camera-retro" aria-hidden="true"></i> My Snap
-  </button>
-  <a href="#">
+  </a>
+  <a href="#" {{action 'toggleHelp'}}>
     <i class="fa fa-weixin" aria-hidden="true"></i> Help
   </a>
 </div>
 
-{{! News Feed}}
-{{#liquid-if isNewsFeedVisible class="newsFeed"}}
+{{! News Feed }}
+{{#liquid-if (eq activeSnapComponent 'news-feed') 
+  class="news-feed-container active-component-container"}}
   {{news-feed 
     model=newsFeedData
     removeNewsItemAction=(action 'removeNewsItem')
   }}
+{{/liquid-if}}
+
+{{! My Snap }}
+{{#liquid-if (eq activeSnapComponent 'status-comp') 
+  class="status-container active-component-container"}}
+  {{status-comp model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
+{{! Appointment scheduler }}
+{{#liquid-if (eq activeSnapComponent 'appointment-scheduler') 
+  class="appointment-scheduler-container active-component-container"}}
+  {{appointment-scheduler model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
+{{! Safe to spend }}
+{{#liquid-if (eq activeSnapComponent 'safe-to-spend') 
+  class="safe-to-spend-container active-component-container"}}
+  {{safe-to-spend model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
+{{! Create transfer }}
+{{#liquid-if (eq activeSnapComponent 'create-transfer') 
+  class="create-transfer-container active-component-container"}}
+  {{create-transfer model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
+{{! Transaction list }}
+{{#liquid-if (eq activeSnapComponent 'transaction-list') 
+  class="transaction-list-container active-component-container"}}
+  {{transaction-list model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
+{{! Account list }}
+{{#liquid-if (eq activeSnapComponent 'account-list') 
+  class="account-list-container active-component-container"}}
+  {{account-list model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
+{{! Location map }}
+{{#liquid-if (eq activeSnapComponent 'location-map') 
+  class="location-map-container active-component-container"}}
+  {{location-map model=activeSnapComponentTransientData}}
 {{/liquid-if}}

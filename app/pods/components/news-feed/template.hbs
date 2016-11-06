@@ -4,9 +4,9 @@
     {{#each model as |feedItem|}}
       <li>
         <span class="icon">
-          {{#if (eq feedItem.newsFeedGroup 'Alert')}}
+          {{#if (eq feedItem.groupName 'Alert')}}
             <i class="fa fa-exclamation" aria-hidden="true"></i>
-          {{else if (eq feedItem.newsFeedGroup 'Notification')}}
+          {{else if (eq feedItem.groupName 'Notification')}}
             <i class="fa fa-flag-o" aria-hidden="true"></i>
           {{else}}
             <i class="fa fa-comment-o" aria-hidden="true"></i>
