@@ -57,4 +57,13 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     min-height: 30rem;
   }
+
+  .component-container-title {
+    border-bottom: 1px solid transparent;
+    color: #616161;
+    line-height: 24px;
+    margin: 20px 0 8px;
+    padding: 0 24px;
+    font-size: 1.5rem;
+  }
 }

@@ -63,7 +63,7 @@
 {{! Transaction list }}
 {{#liquid-if (eq activeSnapComponent 'transaction-list') 
   class="transaction-list-container active-component-container"}}
-  {{transaction-list model=activeSnapComponentTransientData}}
+  {{transaction-list transactions=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! Account list }}

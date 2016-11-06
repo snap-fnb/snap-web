@@ -18,7 +18,7 @@ export default [{
   "account": "joint checking",
   "category": "travel",
   "memo": "Amazing wool sweater",
-  "timeStamp": "2016-10-22T18:25:43.511Z",
+  "timeStamp": "2016-09-22T18:25:43.511Z",
   "tags": [
     "trip",
     "canada",
@@ -32,7 +32,7 @@ export default [{
   "account": "joint checking",
   "category": "travel",
   "memo": "Great meal - fresh salmon",
-  "timeStamp": "2016-10-23T18:25:43.511Z",
+  "timeStamp": "2016-06-23T18:25:43.511Z",
   "tags": [
     "trip",
     "canada",
@@ -46,7 +46,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-11-01T18:25:43.511Z",
   "tags": [
     "dining",
     "lunch"
@@ -59,7 +59,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-11-02T18:25:43.511Z",
   "tags": [
     "dining",
     "lunch"
@@ -72,7 +72,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-11-03T18:25:43.511Z",
   "tags": [
     "dining",
     "lunch"
@@ -85,7 +85,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-11-04T18:25:43.511Z",
   "tags": [
     "dining",
     "lunch"
@@ -98,7 +98,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-10-30T18:25:43.511Z",
   "tags": [
     "dining",
     "lunch"
@@ -111,7 +111,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-10-29T18:25:43.511Z",
   "tags": [
     "dining",
     "lunch"
@@ -124,7 +124,7 @@ export default [{
   "account": "steve",
   "category": "dining",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-10-28T18:25:43.511Z",
   "tags": [
     "dining",
     "dinner"
@@ -137,7 +137,7 @@ export default [{
   "account": "joint checking",
   "category": "repair",
   "memo": "",
-  "timeStamp": "2016-10-02T18:25:43.511Z",
+  "timeStamp": "2016-10-15T18:25:43.511Z",
   "tags": [
     "repair",
     "mazda"

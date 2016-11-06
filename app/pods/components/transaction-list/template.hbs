@@ -1,59 +1,31 @@
-Transaction List
-<!-- Thanks for the starting point, Tim:
-http://v4-alpha.getbootstrap.com/layout/flexbox-grid/#auto-layout-columns -->
-<div class="container">
-  <div class="row">
-    <div class="col-xs">
-      Date
-    </div>
-    <div class="col-xs">
-      Category
-    </div>
-    <div class="col-xs">
-      Payee
-    </div>
-    <div class="col-xs">
-      Memo
-    </div>
-    <div class="col-xs">
-      Outflow
-    </div>
-    <div class="col-xs">
-      Infow
-    </div>
-    <div class="col-xs">
-      Cleared?
-    </div>
-  </div>
-
-{{#each transactions as |t|}}
-  <div class="row">
-    <div class="col-xs">
-      {{t.dateStamp}}
-    </div>
-    <div class="col-xs">
-      {{t.category}}
-    </div>
-    <div class="col-xs">
-      {{t.payee}}
-    </div>
-    <div class="col-xs">
-      {{t.memo}}
-    </div>
-    <div class="col-xs">
-      ${{t.outflow}}
-    </div>
-    <div class="col-xs">
-      ${{t.inflow}}
-    </div>
-    <div class="col-xs">
-      {{#if t.cleared}}
-        <i style="color:green" class="fa fa-check-circle-o" aria-hidden="true"></i>
-      {{else}}
-        <i class="fa fa-circle-o" aria-hidden="true"></i>
-      {{/if}}
-
-    </div>
-  </div>
-{{/each}}
-</div>
+<div class="component-container-title">Transaction List</div>
+{{#liquid-if hasTransactions}}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Account</th>
+        <th>Category</th>
+        <th>Paid To</th>
+        <th>Amount</th>
+        <th>Memo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each transactions as |t index|}}
+        <tr>
+          <th scope="row">{{index}}</th>
+          <td>{{t.account}}</td>
+          <td>{{moment-format t.timeStamp 'MM-DD-YYYY'}}</td>
+          <td>{{t.category}}</td>
+          <td>{{t.payee}}</td>
+          <td>{{t.amount}}</td>
+          <td>{{t.memo}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No recent transactions.  You are probably a hermit!</p>
+{{/liquid-if}}

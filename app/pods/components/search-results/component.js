@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     get() {
       const results = this.get('results');
 
-      if (!isEmpty(results) && !isEmpty(results.canI) && !isEmpty(results.showMe)) {
+      if (!isEmpty(results) && (!isEmpty(results.canI) || !isEmpty(results.showMe))) {
         return true;
       }
 

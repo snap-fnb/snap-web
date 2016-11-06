@@ -11,16 +11,42 @@ export default Ember.Controller.extend({
   // The data to pass to the currently active snap component.
   activeSnapComponentTransientData: null,
 
+  // Whether any data is currently being fetched.
+  isTransientDataLoading: false,
+
   // Newsfeed data
   newsFeedData: null,
 
   actions: {
     // Chooses the component to display and sets its data.
     displaySnapComponent(chosenItem) {
-      this.setProperties({
-        activeSnapComponentTransientData: chosenItem,
-        activeSnapComponent: chosenItem.componentName
-      });
+      const ajax = this.get('ajax');
+      let request;
+      
+      this.set('activeSnapComponent', chosenItem.componentName);
+
+      switch (chosenItem.type) {
+        case 'transaction':
+          request = ajax.request('/transactions', {
+            method: 'GET',
+            data: {
+              query: chosenItem.codeName,
+              amount: chosenItem.amount
+            }
+          });
+          break;
+      
+        default:
+          break;
+      }
+      
+      if (request) {
+        request.then(results => {
+          if (this.get('activeSnapComponent') === chosenItem.componentName) {
+            this.set('activeSnapComponentTransientData', results);
+          }
+        });
+      }
     },
 
     // Toggles the news feed component
