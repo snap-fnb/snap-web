@@ -14,10 +14,10 @@
 
   {{#if isLocationFilterType}}
     {{locations-map selectPersonAction=(action "selectPerson")}}
+  {{else if isDayFilterType}}
+    {{day-time-picker}}
   {{else if isPersonFilterType}}
     {{person-list selectPersonAction=(action "selectPerson")}}
-  {{else if isDayFilterType}}
-    {{day-time-picker selectPersonAction=(action "selectPerson")}}
   {{/if}}
 {{/if}}
 
