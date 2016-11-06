@@ -10,8 +10,8 @@ export default Ember.Service.extend({
     }
   },
 
-  getMapElement() {
-    const element = this.createMapElement();
+  getMapElement(element) {
+    //const element = this.createMapElement();
     console.log('element in getMapElement', element);
     this.get('mapUtil').createMap(element);
     return element;

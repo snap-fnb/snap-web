@@ -190,4 +190,5 @@ export default function() {
   });
   // passthrough to the node server that is middleware to slack.
   this.passthrough('http://localhost:1337/**');
+  this.passthrough('http://csi.gstatic.com**');
 }
