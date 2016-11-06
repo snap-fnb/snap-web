@@ -4,7 +4,7 @@ import NLP from 'npm:nlp_compromise';
 const { Logger: { info }} = Ember;
 
 const house = ['house', 'mortgage', 'loan', 'refinance', '2nd', 'second'];
-const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow', 'appointment', 'lender'];
+const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow', 'appointment', 'lender', 'appointment lender'];
 const transactions = ['deposit', 'transfer', 'transaction', 'withdraw', 'escrow', 'payment'];
 // const places = ['Block 16', 'Flat Iron Cafe'];
 const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'out', 'eat out'];
@@ -35,7 +35,12 @@ export default function() {
           });
         }
         break;
-    
+      case 'transaction_list_last_5':
+        result = schema.db.transactions.slice(0, 5);
+        break;
+      case 'transaction_list_this_month':
+        result = schema.db.transactions.slice(0, 6);
+        break;
       default:
         result = [];
         break;
