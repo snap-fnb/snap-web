@@ -1,1 +1,23 @@
-{{yield}}
+{{#if isFiltered}}
+  {{appointment-confirmation selectedPerson=selectedPerson}}
+{{else}}
+  <form {{action "noop" on="submit"}}>
+    <div class="form-group">
+      <label>Filter By</label>
+      <select class="form-control" onchange={{action "selectFilterType" value="target.value"}}>
+        {{#each filterTypes as |filterTypeChoice|}}
+          <option value={{filterTypeChoice}} selected={{eq filterType filterTypeChoice}}>{{filterTypeChoice}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </form>
+
+  {{#if isLocationFilterType}}
+    {{locations-map selectPersonAction=(action "selectPerson")}}
+  {{else if isPersonFilterType}}
+    {{person-list selectPersonAction=(action "selectPerson")}}
+  {{else if isDayFilterType}}
+    {{day-time-picker selectPersonAction=(action "selectPerson")}}
+  {{/if}}
+{{/if}}
+

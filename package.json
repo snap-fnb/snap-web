@@ -53,6 +53,7 @@
     "loader.js": "^4.0.10"
   },
   "dependencies": {
+    "ember-truth-helpers": "^1.2.0",
     "nlp_compromise": "^6.5.3"
   }
 }
