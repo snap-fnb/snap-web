@@ -18,6 +18,14 @@
           {{#each value as |resultItem|}}
             <a class="dropdown-item" href="#"  {{action 'chooseItem' resultItem}}>
               {{resultItem.desc}}
+              {{#if (eq key 'canI')}}
+                <span 
+                  class="assist-text
+                    {{if (eq resultItem.level 1) 'alert-success'}}
+                    {{if (eq resultItem.level 2) 'alert-warning'}}
+                    {{if (eq resultItem.level 3) 'alert-danger'}}
+                "> {{resultItem.levelDesc}}</span>
+              {{/if}}
             </a>
           {{/each}}
         </div>

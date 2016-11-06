@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['safe-to-spend'],
   
+  model: {},
+  
   axis: {
     x: {
       type: 'timeseries',
@@ -15,6 +17,10 @@ export default Ember.Component.extend({
         format: function (d) { return '$' + d; }
       }
     }
+  },
+
+  color: {
+    pattern: ['#aec7e8', '#ffb200']
   },
 
   data: {
@@ -47,6 +53,10 @@ export default Ember.Component.extend({
       5,
       20
     ]
-  ]
+  ],
+  types: {
+    Average: 'area',
+    'This month': 'line',
+  }
 }
 });

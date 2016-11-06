@@ -41,5 +41,15 @@
         padding: 0.5rem 0.25rem;
       }
     }
+
+    &.goals {
+      .goal-description {
+        font-size: 0.75rem;
+      }
+
+      .goal-item {
+        margin: 1rem 0;
+      }
+    }
   }
 }

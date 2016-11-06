@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { isEmpty } = Ember;
+
 export default Ember.Controller.extend({
   // Ember ajax service.
   ajax: Ember.inject.service(),
@@ -43,7 +45,11 @@ export default Ember.Controller.extend({
       if (request) {
         request.then(results => {
           if (this.get('activeSnapComponent') === chosenItem.componentName) {
-            this.set('activeSnapComponentTransientData', results);
+            if (!isEmpty(results)) {
+              this.set('activeSnapComponentTransientData', results);
+            } else {
+              this.set('activeSnapComponentTransientData', chosenItem);
+            }
           }
         });
       }

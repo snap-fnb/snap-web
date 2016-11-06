@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['my-snap'],
 
+  transition: {
+    duration: 1000
+  },
+
   size: {
     height: 200
   },
@@ -53,6 +57,10 @@ export default Ember.Component.extend({
         320,
         466
       ]
-    ]
+    ],
+    types: {
+      Balance: 'area',
+      Expenses: 'area',
+    }
   }
 });

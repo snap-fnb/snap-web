@@ -1,10 +1,10 @@
 export default [{
-  category: 'payment_upcoming',
+  category: 'payment_past',
   detail: 'You have an upcoming payment that you may not meet.',
-  groupName: 'Alert',
-  groupKey: 'alerts',
+  groupName: 'Notification',
+  groupKey: 'notifications',
   level: 1, // 1 red, 2, orange, 3 green
-  title: 'Potential insufficient funds'
+  title: 'Added transaction from Email (jonnyappleseed@gmail.com)'
 }, {
   category: 'message',
   detail: 'The current Terms and Agreement have changed.  Read more details here.',
