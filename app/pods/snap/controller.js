@@ -60,8 +60,8 @@ export default Ember.Controller.extend({
 
     // Toggles the news feed component
     toggleHelp() {
-      if (this.get('activeSnapComponent') !== 'news-feed') {
-        this.set('activeSnapComponent', 'news-feed');
+      if (this.get('activeSnapComponent') !== 'snap-help') {
+        this.set('activeSnapComponent', 'snap-help');
       } else {
         this.set('activeSnapComponent', '');
       }

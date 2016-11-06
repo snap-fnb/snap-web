@@ -1,1 +1,86 @@
-<div class="component-container-title">My Snap</div>
+<div class="component-container-title">
+  My Snap
+  <small><i class="fa fa-thumb-tack" aria-hidden="true"></i></small>
+</div>
+
+<div class="container">
+  <div class="row my-snap-status-bar flex-items-xs-middle">
+    <div class="status-item col-xs">
+      <span class="">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+      </span>
+      <h5 class="">Available Balance</h5>
+      <div class="amount">$2,534.00</div>
+    </div>
+    <div class="status-item col-xs">
+      <span class="">
+        <i class="fa fa-tasks" aria-hidden="true"></i>
+      </span>
+      <h5 class="">Goals</h5>
+      <div class="amount">$100.00</div>
+    </div>
+    <div class="status-item col-xs">
+      <span class="">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+      </span>
+      <h5 class="">Scheduled</h5>
+      <div class="amount">$700.00</div>
+    </div>
+  </div>
+
+  {{! Graphs }}
+  <div class="row">
+    {{! Balances }}
+    <div class="card text-xs-center col-xs balance">
+      <div class="card-header">
+        Balances
+      </div>
+      <div class="card-block">
+        <h4 class="card-title">Balance this month</h4>
+        {{c3-chart data=balanceData axis=balanceAxis size=size}}
+      </div>
+      <div class="card-footer text-muted">
+        24 days ago
+      </div>
+    </div>
+
+    {{! Goals}}
+    <div class="card text-xs-center col-xs">
+      <div class="card-header">
+        Goals
+      </div>
+      <div class="card-block">
+        <h4 class="card-title">Hmm, nothing to see yet</h4>
+        <p class="card-text">Don't worry, as we learn more, we will automagically add goals for you.</p>
+      </div>
+    </div>
+
+    {{! Upcoming Payments}}
+    <div class="card text-xs-center col-xs bill-pay">
+      <div class="card-header">
+        Upcoming Payments
+      </div>
+      <div class="card-block">
+        <h4 class="card-title">Payments coming your way</h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <span class="amount">$450</span>
+            <span class="payee">Woodhouse</span>
+            <a href="#">
+              Take a peek
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="list-group-item">
+            <span class="amount">$250</span>
+            <span class="payee">NFM</span>
+            <a href="#">
+              Take a peek
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
