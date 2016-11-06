@@ -60,7 +60,7 @@
 
   .component-container-title {
     border-bottom: 1px solid transparent;
-    color: #616161;
+    color: #617961;
     line-height: 24px;
     margin: 20px 0 24px;
     padding: 0 24px;
@@ -69,5 +69,9 @@
     .fa {
       margin-left: 0.5rem;
     }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
