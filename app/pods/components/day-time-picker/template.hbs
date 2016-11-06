@@ -1,4 +1,11 @@
-{{#power-calendar selected=selected onSelect=(action (mut selected) value="moment") as |calendar|}}
-  {{calendar.nav}}
-  {{calendar.days}}
-{{/power-calendar}}
+<div class="container">
+  <div class="row">
+    <div class="col-xs">&nbsp;</div>
+    <div
+      class="col-xs-8">        {{#power-calendar selected=selected onSelect=(action (mut selected) value="moment") as |calendar|}}
+      {{calendar.nav}}
+      {{calendar.days}}
+    {{/power-calendar}}</div>
+    <div class="col-xs">&nbsp;</div>
+  </div>
+</div>
