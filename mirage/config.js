@@ -7,10 +7,12 @@ const house = ['house', 'mortgage', 'loan', 'refinance', '2nd', 'second'];
 const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow', 'appointment', 'lender'];
 const transactions = ['deposit', 'transfer', 'transaction', 'withdraw', 'escrow', 'payment'];
 // const places = ['Block 16', 'Flat Iron Cafe'];
-const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'vacation', 'out', 'eat out'];
+const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'out', 'eat out'];
+const travelEvents = ['paris', 'vacation', 'time off', 'holiday'];
 const accounts = ['college', 'funds', 'mine', 'partner'];
 const location = ['branch'];
 const retirement = ['retirement', 'retire'];
+const lifeEvents = ['ring', 'engagement'];
 
 export default function() {
 
@@ -234,7 +236,7 @@ export default function() {
       }
 
       if (value) {
-        desc = `Spend ${value} for ${spendEventTerms[0].normal}?`;
+        desc = `Spend $${value} for ${spendEventTerms[0].normal}?`;
       } else {
         desc = `Spend money on ${spendEventTerms[0].normal}?`;
       }
@@ -245,7 +247,8 @@ export default function() {
         componentName: 'safe-to-spend',
         type: 'transaction',
         level: 1,
-        levelDesc: `Yep, don't go crazy though!`
+        levelDesc: `Yep, don't go crazy though!`,
+        amount: value
       }]);
 
       showMeResults = showMeResults.concat([{
@@ -258,6 +261,67 @@ export default function() {
         codeName: 'transaction_filter_by_category',
         componentName: 'transaction-list',
         type: 'transaction'
+      }]);
+    }
+
+    // Match travel events
+    let travelEventTerms = searchTerms.filter(term => travelEvents.includes(term.normal));
+    if (travelEventTerms.length) {
+      let value = '';
+      let desc = '';
+
+      if (parsedQuestion.values()[0]) {
+        value = parsedQuestion.values()[0].text;
+      }
+
+      if (value) {
+        desc = `Spend ${value} for ${travelEventTerms[0].normal}?`;
+      } else {
+        desc = `Spend money on ${travelEventTerms[0].normal}?`;
+      }
+
+      canIResults = canIResults.concat([{
+        desc,
+        codeName: 'safe_to_spend',
+        componentName: 'safe-to-spend',
+        type: 'transaction',
+        level: 1,
+        levelDesc: `Let's setup a ${travelEventTerms[0].normal} goal`,
+        amount: value
+      }]);
+
+      showMeResults = showMeResults.concat([{
+        desc: `All previous ${travelEventTerms[0].normal} transactions`,
+        codeName: 'transaction_filter_by_place',
+        componentName: 'transaction-list',
+        type: 'transaction'
+      }]);
+    }
+
+    // Life events
+    let lifeEventTerms = searchTerms.filter(term => lifeEvents.includes(term.normal));
+    if (lifeEventTerms.length) {
+      let value = '';
+      let desc = '';
+
+      if (parsedQuestion.values()[0]) {
+        value = parsedQuestion.values()[0].text;
+      }
+
+      if (value) {
+        desc = `Spend ${value} for ${lifeEventTerms[0].normal}?`;
+      } else {
+        desc = `Spend money on ${lifeEventTerms[0].normal}?`;
+      }
+
+      canIResults = canIResults.concat([{
+        desc,
+        codeName: 'setup_goal',
+        componentName: 'goal-setup',
+        type: 'goal',
+        level: 1,
+        levelDesc: `Yep. Let's setup an ${lifeEventTerms[0].normal} goal`,
+        amount: value
       }]);
     }
 

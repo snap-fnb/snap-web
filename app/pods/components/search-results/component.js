@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed, isEmpty, Logger: { info }} = Ember;
+const { computed, isEmpty } = Ember;
 
 export default Ember.Component.extend({
   classNames: ['search-results'],
