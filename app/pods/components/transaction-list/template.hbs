@@ -1,1 +1,59 @@
 Transaction List
+<!-- Thanks for the starting point, Tim:
+http://v4-alpha.getbootstrap.com/layout/flexbox-grid/#auto-layout-columns -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs">
+      Date
+    </div>
+    <div class="col-xs">
+      Category
+    </div>
+    <div class="col-xs">
+      Payee
+    </div>
+    <div class="col-xs">
+      Memo
+    </div>
+    <div class="col-xs">
+      Outflow
+    </div>
+    <div class="col-xs">
+      Infow
+    </div>
+    <div class="col-xs">
+      Cleared?
+    </div>
+  </div>
+
+{{#each transactions as |t|}}
+  <div class="row">
+    <div class="col-xs">
+      {{t.dateStamp}}
+    </div>
+    <div class="col-xs">
+      {{t.category}}
+    </div>
+    <div class="col-xs">
+      {{t.payee}}
+    </div>
+    <div class="col-xs">
+      {{t.memo}}
+    </div>
+    <div class="col-xs">
+      ${{t.outflow}}
+    </div>
+    <div class="col-xs">
+      ${{t.inflow}}
+    </div>
+    <div class="col-xs">
+      {{#if t.cleared}}
+        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+      {{else}}
+        <i class="fa fa-circle-o" aria-hidden="true"></i>
+      {{/if}}
+
+    </div>
+  </div>
+{{/each}}
+</div>
