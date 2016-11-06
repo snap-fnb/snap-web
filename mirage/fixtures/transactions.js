@@ -5,7 +5,7 @@ export default [{
   "payee": "State of Nebraska",
   "account": "joint checking",
   "category": "income",
-  "memo": "Payday",
+  "memo": "Pay day is always awesome!",
   "timeStamp": "2016-10-02T18:25:43.511Z",
   "tags": [
     "income"
@@ -16,7 +16,7 @@ export default [{
   "flow": "out",
   "payee": "Wooly Canada",
   "account": "joint checking",
-  "category": "travel",
+  "category": "clothing",
   "memo": "Amazing wool sweater",
   "timeStamp": "2016-09-22T18:25:43.511Z",
   "tags": [
@@ -45,7 +45,7 @@ export default [{
   "payee": "Block 16",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "Delicious!",
   "timeStamp": "2016-11-01T18:25:43.511Z",
   "tags": [
     "dining",
@@ -58,7 +58,7 @@ export default [{
   "payee": "Flat Iron",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "Meh, kind of expensive.",
   "timeStamp": "2016-11-02T18:25:43.511Z",
   "tags": [
     "dining",
@@ -71,7 +71,7 @@ export default [{
   "payee": "Kitchen Table",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "Local awesomeness.",
   "timeStamp": "2016-11-03T18:25:43.511Z",
   "tags": [
     "dining",
@@ -84,7 +84,7 @@ export default [{
   "payee": "The Drover",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "Dark dungeon. Way back italian.",
   "timeStamp": "2016-11-04T18:25:43.511Z",
   "tags": [
     "dining",
@@ -97,7 +97,7 @@ export default [{
   "payee": "The Burger Master",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "So so burger. Won't go back.",
   "timeStamp": "2016-10-30T18:25:43.511Z",
   "tags": [
     "dining",
@@ -110,7 +110,7 @@ export default [{
   "payee": "Swine Dining",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "Delicious BBQ!",
   "timeStamp": "2016-10-29T18:25:43.511Z",
   "tags": [
     "dining",
@@ -123,7 +123,7 @@ export default [{
   "payee": "801 Chop House",
   "account": "steve",
   "category": "dining",
-  "memo": "",
+  "memo": "Wowza! Kinda pricey!",
   "timeStamp": "2016-10-28T18:25:43.511Z",
   "tags": [
     "dining",
@@ -136,7 +136,7 @@ export default [{
   "payee": "Woodhouse Mazda",
   "account": "joint checking",
   "category": "repair",
-  "memo": "",
+  "memo": "No one likes car payments!",
   "timeStamp": "2016-10-15T18:25:43.511Z",
   "tags": [
     "repair",

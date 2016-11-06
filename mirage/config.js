@@ -64,22 +64,28 @@ export default function() {
     if (parsedQuestion.terms.length === 1 &&
         parsedQuestion.terms[0].tag === 'Value') {
       canIResults = canIResults.concat([{
-        desc: `Spend $${parsedQuestion.terms[0].normal} on dining today`,
+        desc: `Spend $${parsedQuestion.terms[0].normal} on dining today?`,
         codeName: 'safe_to_spend_dining',
         componentName: 'safe-to-spend',
         type: 'transaction',
+        level: 1,
+        levelDesc: 'Yep, go for it!',
         amount: parsedQuestion.terms[0].number
       }, {
-        desc: `Spend $${parsedQuestion.terms[0].normal} on gifts`,
+        desc: `Spend $${parsedQuestion.terms[0].normal} on gifts?`,
         codeName: 'safe_to_spend_gifts',
         componentName: 'safe-to-spend',
         type: 'transaction',
+        level: 2,
+        levelDesc: 'Yes, but cutting it close',
         amount: parsedQuestion.terms[0].number
       }, {
-        desc: `Spend $${parsedQuestion.terms[0].normal} on repairs`,
+        desc: `Spend $${parsedQuestion.terms[0].normal} on repairs?`,
         codeName: 'safe_to_spend_repair',
         componentName: 'safe-to-spend',
         type: 'transaction',
+        level: 2,
+        levelDesc: 'Yes, but cutting it close',
         amount: parsedQuestion.terms[0].number
       }]);
 
@@ -96,10 +102,12 @@ export default function() {
     let houseTerms = searchTerms.filter(term => house.includes(term.normal));
     if (houseTerms.length) {
       canIResults = canIResults.concat([{
-        desc: 'Buy a house soon',
+        desc: 'Buy a house soon?',
         codeName: 'future_transaction_mortgage_app',
         componentName: 'appointment-scheduler',
-        type: 'appointment'
+        type: 'appointment',
+        level: 2,
+        levelDesc: 'Not yet, getting close!'
       }]);
 
       showMeResults = showMeResults.concat([{
@@ -135,10 +143,12 @@ export default function() {
     let retirementTerms = searchTerms.filter(term => retirement.includes(term.normal));
     if (retirementTerms.length) {
       canIResults = canIResults.concat([{
-        desc: 'Retire soon',
+        desc: 'Retire soon?',
         codeName: 'retirement_start',
         componentName: 'appointment-scheduler',
-        type: 'appointment'
+        type: 'appointment',
+        level: 3,
+        levelDesc: 'Not yet :-)!'
       }]);
 
       showMeResults = showMeResults.concat([{
@@ -163,10 +173,12 @@ export default function() {
     let transactionTerms = searchTerms.filter(term => transactions.includes(term.normal));
     if (transactionTerms.length) {
       canIResults = canIResults.concat([{
-        desc: 'Transfer money',
+        desc: 'Transfer money?',
         codeName: 'transaction_money_transfer',
         componentName: 'create-transfer',
-        type: 'transfer'
+        type: 'transfer',
+        level: 1,
+        levelDesc: 'Yep!'
       }]);
 
       if (parsedQuestion.adjectives().filter(a => a.normal === 'all').length) {
@@ -222,16 +234,18 @@ export default function() {
       }
 
       if (value) {
-        desc = `Spend ${value} for ${spendEventTerms[0].normal}`;
+        desc = `Spend ${value} for ${spendEventTerms[0].normal}?`;
       } else {
-        desc = `Spend money on ${spendEventTerms[0].normal}`;
+        desc = `Spend money on ${spendEventTerms[0].normal}?`;
       }
 
       canIResults = canIResults.concat([{
         desc,
         codeName: 'safe_to_spend',
         componentName: 'safe-to-spend',
-        type: 'transaction'
+        type: 'transaction',
+        level: 1,
+        levelDesc: `Yep, don't go crazy though!`
       }]);
 
       showMeResults = showMeResults.concat([{
