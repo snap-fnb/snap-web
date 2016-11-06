@@ -3,12 +3,12 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   maps: Ember.inject.service(),
 
-  location: 'First National Bank',
-
   didInsertElement() {
     this._super(...arguments);
-    let location = this.get('location');
-    let mapElement = this.get('maps').getMapElement(location);
+    console.log('get maps', this.get('maps'));
+    let mapElement = this.get('maps').getMapElement();
+    console.log('mapElement', mapElement);
     this.$('.map-container').append(mapElement);
+    console.log('jquery of map container', this.$('.map-container'));
   }
 });
