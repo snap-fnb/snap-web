@@ -15,7 +15,7 @@
 
 {{! Action items.}}
 <div class="action-items {{unless isNewsFeedVisible 'hide'}}">
-  <a href="#" {{action 'toggleNewsFeed'}}>
+  <a href="#" {{action 'toggleNewsFeed'}} data-toggle="tooltip" data-placement="top" title="Things that have happened since your last visit">
     <i class="fa fa-newspaper-o" aria-hidden="true"></i>News Brief 
     <span class="tag tag-pill tag-primary">{{newsFeedData.length}}</span>
   </a>
@@ -34,6 +34,12 @@
     model=newsFeedData
     removeNewsItemAction=(action 'removeNewsItem')
   }}
+{{/liquid-if}}
+
+{{! Help Docs }}
+{{#liquid-if (eq activeSnapComponent 'snap-help') 
+  class="status-container active-component-container"}}
+  {{snap-help model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! My Snap }}
@@ -77,3 +83,4 @@
   class="location-map-container active-component-container"}}
   {{location-map model=activeSnapComponentTransientData}}
 {{/liquid-if}}
+

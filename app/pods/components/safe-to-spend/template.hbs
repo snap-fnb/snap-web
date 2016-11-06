@@ -1,1 +1,15 @@
-<div class="component-container-title">Safe to Spend</div>
+<div class="component-container-title">Spending Advice</div>
+
+<div class="container">
+  <div class="row">
+    <div class="spend-advice">
+      <span class="spend-amount alert-warning">$20</span> is a bit high.  You normally spend on average around 
+      <span class="spend-average">$12.</span>  You are still on track though!
+    </div>
+  </div>
+
+  {{! Spend graph. }}
+  <div class="row">
+    {{c3-chart data=data axis=axis}}
+  </div>
+</div>

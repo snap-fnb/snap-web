@@ -7,9 +7,10 @@ const house = ['house', 'mortgage', 'loan', 'refinance', '2nd', 'second'];
 const appointment = ['teller', 'banker', 'in person', 'meeting', 'start', 'escrow', 'appointment', 'lender'];
 const transactions = ['deposit', 'transfer', 'transaction', 'withdraw', 'escrow', 'payment'];
 // const places = ['Block 16', 'Flat Iron Cafe'];
-const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'vacation'];
+const spendEvents = ['lunch', 'dinner', 'go out', 'eat', 'repair', 'vacation', 'out', 'eat out'];
 const accounts = ['college', 'funds', 'mine', 'partner'];
 const location = ['branch'];
+const retirement = ['retirement', 'retire'];
 
 export default function() {
 
@@ -63,8 +64,20 @@ export default function() {
     if (parsedQuestion.terms.length === 1 &&
         parsedQuestion.terms[0].tag === 'Value') {
       canIResults = canIResults.concat([{
-        desc: `Spend $${parsedQuestion.terms[0].normal} today`,
-        codeName: 'safe_to_spend',
+        desc: `Spend $${parsedQuestion.terms[0].normal} on dining today`,
+        codeName: 'safe_to_spend_dining',
+        componentName: 'safe-to-spend',
+        type: 'transaction',
+        amount: parsedQuestion.terms[0].number
+      }, {
+        desc: `Spend $${parsedQuestion.terms[0].normal} on gifts`,
+        codeName: 'safe_to_spend_gifts',
+        componentName: 'safe-to-spend',
+        type: 'transaction',
+        amount: parsedQuestion.terms[0].number
+      }, {
+        desc: `Spend $${parsedQuestion.terms[0].normal} on repairs`,
+        codeName: 'safe_to_spend_repair',
         componentName: 'safe-to-spend',
         type: 'transaction',
         amount: parsedQuestion.terms[0].number
@@ -115,6 +128,34 @@ export default function() {
         codeName: 'location_with_bankers_lenders',
         componentName: 'appointment-scheduler',
         type: 'appointment'
+      }]);
+    }
+
+    // Match appointments
+    let retirementTerms = searchTerms.filter(term => retirement.includes(term.normal));
+    if (retirementTerms.length) {
+      canIResults = canIResults.concat([{
+        desc: 'Retire soon',
+        codeName: 'retirement_start',
+        componentName: 'appointment-scheduler',
+        type: 'appointment'
+      }]);
+
+      showMeResults = showMeResults.concat([{
+        desc: 'How to start a retirement fund',
+        codeName: 'retirement_start',
+        componentName: 'appointment-scheduler',
+        type: 'appointment'
+      }, {
+        desc: 'Schedule an appointment with a retirement specialist',
+        codeName: 'appointment_setup_banker',
+        componentName: 'appointment-scheduler',
+        type: 'appointment'
+      }, {
+        desc: `First National Bank's retirement planning website`,
+        codeName: 'help_planning',
+        componentName: 'snap-help',
+        type: 'help'
       }]);
     }
 
