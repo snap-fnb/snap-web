@@ -1,1 +1,46 @@
-Person List
+<div class="container">
+  {{#each personList as |person|}}
+    <div class="row person-list grid">
+      <div class="col-xs">
+        <div class="container-fluid">
+          <div class="row-fluid grid">
+            <div class="col-xs-12">
+              <button class="btn btn-primary" {{action "selectPerson" person}}>
+                Select
+              </button>
+            </div>
+            {{#if person.isAvailableNow}}
+              <div class="col-xs-12" style="margin-top: 10px;">
+                <button class="btn btn-secondary btn-link" {{action "chatWithPerson" person}}>
+                  <i class="fa fa-wechat" aria-hidden="true" style="font-size: 1em"></i> Chat Now!
+                </button>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xs">
+        <div class="container-fluid">
+          <img class="img-thumbnail img-fluid" src="{{person.pictureUrl}}">
+        </div>
+      </div>
+      <div class="col-xs">
+        {{person.name}}<br/>
+        {{person.office}}<br/>
+        {{person.email}}
+      </div>
+      <div class="col-xs">
+        {{person.location1}}
+        {{#if person.location2}}
+          <br/>
+        {{/if}}
+        {{person.location2}}
+        {{#if person.location3}}
+          <br/>
+        {{/if}}
+        {{person.location3}}
+      </div>
+    </div>
+  {{/each}}
+</div>

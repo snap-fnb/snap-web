@@ -2,3 +2,30 @@
 @import 'search-container';
 @import 'search-results';
 @import 'chat-box';
+
+.row.grid > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-fluid.grid > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row.grid {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid $gray-lighter;
+}
+
+.btn {
+  padding: 0.3rem 1rem;
+}
+
+// Default green and opt-out if wanting a different color
+.fa {
+  color: $brand-primary;
+}
