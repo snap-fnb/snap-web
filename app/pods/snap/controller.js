@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   // Ember ajax service.
   ajax: Ember.inject.service(),
-  
+
   // The currently displayed component.  This is the result of choosing a search
   // suggestion or one of the action items.
   activeSnapComponent: '',
@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
     displaySnapComponent(chosenItem) {
       const ajax = this.get('ajax');
       let request;
-      
+
       this.set('activeSnapComponent', chosenItem.componentName);
 
       switch (chosenItem.type) {
@@ -35,11 +35,11 @@ export default Ember.Controller.extend({
             }
           });
           break;
-      
+
         default:
           break;
       }
-      
+
       if (request) {
         request.then(results => {
           if (this.get('activeSnapComponent') === chosenItem.componentName) {
@@ -62,6 +62,15 @@ export default Ember.Controller.extend({
     toggleHelp() {
       if (this.get('activeSnapComponent') !== 'snap-help') {
         this.set('activeSnapComponent', 'snap-help');
+      } else {
+        this.set('activeSnapComponent', '');
+      }
+    },
+
+    // Toggles the news feed component
+    toggleChat() {
+      if (this.get('activeSnapComponent') !== 'snap-chat') {
+        this.set('activeSnapComponent', 'snap-chat');
       } else {
         this.set('activeSnapComponent', '');
       }

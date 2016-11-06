@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  options:
-  {
+  options: {
     serverUrl: 'http://localhost:1337', // Url to your Slack server component
-    widgetState : 'closed|closed', // Have the component start opened or closed
+    widgetState: 'open', // Have the component start opened or closed
 
     headerText: 'How can we help?', // Text in the widget header
     headerImage: 'assets/images/fnb_circle_logo.png', // Path to profile image
@@ -14,7 +13,7 @@ export default Ember.Component.extend({
 
     inputPlaceholderText: 'Write message here...', // Placeholder for the text input
 
-    supportUsername: 'FNB Advisor: Tracey', // Name to show support replies under
-    chatUserName: 'Me', // Name to show before user messages
+    supportUserName: 'FNB Advisor: Tracey', // Name to show support replies under
+    chatUserName: 'Me' // Name to show before user messages
   }
 });

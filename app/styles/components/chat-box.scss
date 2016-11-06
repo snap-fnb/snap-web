@@ -1,3 +1,10 @@
+.chat-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
 .slack-chat-widget .sc-header {
   border-top-right-radius: 5px;
   border-top-left-radius: 10px;
@@ -12,4 +19,18 @@
   position: absolute;
   display: block;
   border: 0px solid #261732;
+}
+
+.slack-chat-widget .sc-body .sc-new-message .sc-message-input {
+  border: 1px solid #006633;
+}
+
+.slack-chat-widget {
+  font-size: 16px;
+  width: 50em;
+  color: #fff;
+  box-sizing: border-box;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 12px 4px;
 }

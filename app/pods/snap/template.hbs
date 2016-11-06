@@ -1,86 +1,105 @@
 {{! Primary search. }}
 {{#search-container
-  displaySectionAction=(action 'displaySnapComponent')
-  searchAction=(action 'globalSearch')
-  toggleNewsFeedAction=(action 'toggleNewsFeed')
-  as |isSearching isLoading groupedResults selectResultAction|}}
-  {{search-results 
-    isLoading=isLoading
-    isSearching=isSearching
-    results=groupedResults 
-    helpAction=helpAction
-    selectResultAction=selectResultAction
+displaySectionAction=(action 'displaySnapComponent')
+searchAction=(action 'globalSearch')
+toggleNewsFeedAction=(action 'toggleNewsFeed')
+as |isSearching isLoading groupedResults selectResultAction|}}
+  {{search-results
+  isLoading=isLoading
+  isSearching=isSearching
+  results=groupedResults
+  helpAction=helpAction
+  selectResultAction=selectResultAction
   }}
 {{/search-container}}
 
 {{! Action items.}}
 <div class="action-items {{unless isNewsFeedVisible 'hide'}}">
-  <a href="#" {{action 'toggleNewsFeed'}} data-toggle="tooltip" data-placement="top" title="Things that have happened since your last visit">
-    <i class="fa fa-newspaper-o" aria-hidden="true"></i>News Brief 
-    <span class="tag tag-pill tag-primary">{{newsFeedData.length}}</span>
-  </a>
-  <a href="#" {{action 'toggleMySnap'}}>
-    <i class="fa fa-camera-retro" aria-hidden="true"></i> My Snap
-  </a>
-  <a href="#" {{action 'toggleHelp'}}>
-    <i class="fa fa-weixin" aria-hidden="true"></i> Help
-  </a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4">
+        <a href="#" {{action 'toggleNewsFeed'}} data-toggle="tooltip" data-placement="top"
+           title="Things that have happened since your last visit">
+          <i class="fa fa-newspaper-o" aria-hidden="true"></i>News Brief
+          <span class="tag tag-pill tag-primary">{{newsFeedData.length}}</span>
+        </a></div>
+      <div class="col-xs">
+        <a href="#" {{action 'toggleMySnap'}}>
+          <i class="fa fa-camera-retro" aria-hidden="true"></i> My Snap
+        </a></div>
+      <div class="col-xs">
+        <a href="#" {{action 'toggleHelp'}}>
+          <i class="fa fa-question-circle" aria-hidden="true"></i> Help
+        </a></div>
+      <div class="col-xs">
+        <a href="#" {{action 'toggleChat'}}>
+          <i class="fa fa-weixin" aria-hidden="true"></i> Chat
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 {{! News Feed }}
-{{#liquid-if (eq activeSnapComponent 'news-feed') 
-  class="news-feed-container active-component-container"}}
-  {{news-feed 
-    model=newsFeedData
-    removeNewsItemAction=(action 'removeNewsItem')
+{{#liquid-if (eq activeSnapComponent 'news-feed')
+class="news-feed-container active-component-container"}}
+  {{news-feed
+  model=newsFeedData
+  removeNewsItemAction=(action 'removeNewsItem')
   }}
 {{/liquid-if}}
 
 {{! Help Docs }}
-{{#liquid-if (eq activeSnapComponent 'snap-help') 
-  class="status-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'snap-help')
+class="status-container active-component-container"}}
   {{snap-help model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! My Snap }}
-{{#liquid-if (eq activeSnapComponent 'status-comp') 
-  class="status-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'status-comp')
+class="status-container active-component-container"}}
   {{status-comp model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
+{{! Chat Box }}
+{{#liquid-if (eq activeSnapComponent 'snap-chat')
+class="chat-box-container active-component-container"}}
+  {{chat-box model=activeSnapComponentTransientData}}
+{{/liquid-if}}
+
 {{! Appointment scheduler }}
-{{#liquid-if (eq activeSnapComponent 'appointment-scheduler') 
-  class="appointment-scheduler-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'appointment-scheduler')
+class="appointment-scheduler-container active-component-container"}}
   {{appointment-scheduler model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! Safe to spend }}
-{{#liquid-if (eq activeSnapComponent 'safe-to-spend') 
-  class="safe-to-spend-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'safe-to-spend')
+class="safe-to-spend-container active-component-container"}}
   {{safe-to-spend model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! Create transfer }}
-{{#liquid-if (eq activeSnapComponent 'create-transfer') 
-  class="create-transfer-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'create-transfer')
+class="create-transfer-container active-component-container"}}
   {{create-transfer model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! Transaction list }}
-{{#liquid-if (eq activeSnapComponent 'transaction-list') 
-  class="transaction-list-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'transaction-list')
+class="transaction-list-container active-component-container"}}
   {{transaction-list transactions=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! Account list }}
-{{#liquid-if (eq activeSnapComponent 'account-list') 
-  class="account-list-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'account-list')
+class="account-list-container active-component-container"}}
   {{account-list model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
 {{! Location map }}
-{{#liquid-if (eq activeSnapComponent 'location-map') 
-  class="location-map-container active-component-container"}}
+{{#liquid-if (eq activeSnapComponent 'location-map')
+class="location-map-container active-component-container"}}
   {{location-map model=activeSnapComponentTransientData}}
 {{/liquid-if}}
 
